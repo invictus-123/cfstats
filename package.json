@@ -1,0 +1,19 @@
+{
+  "name": "cfstat",
+  "version": "1.0.0",
+  "description": "A web application that allows visualisation of various statistics and compare them for multiple users.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayushman Mathur",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
+    "requests": "^0.3.0"
+  }
+}
