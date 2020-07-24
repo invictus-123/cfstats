@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles.css">
+		<title>CF Stat - <%= title %></title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark stats-nav">
+			<div class = "container">
+				<a class="navbar-brand home-btn" href="/">Codeforces Stats</a>
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><span class="nav-btn">Home</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/compare"><span class="nav-btn">Compare</span></a>
+					</li>
+				</ul>
+				<form class="form-inline" action="/getHandle" method="GET">
+					<input class="form-control mr-sm-2" type="search" name = "handle" placeholder="Enter codeforces handle" aria-label="Search">
+					<button class="btn btn-success" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		<div class="container container2">
+			<div class="info-box">
+				<h1 class="display-4 handle"><span class="home-heading"><span style="color :
+						<% if(curRating >= 3000) {%>
+							black
+						<% } else { %>
+							<%= curTier %>
+						<%}%>;"> <%= handle.substr(0, 1) %></span><span style="color: <%= curTier %>;"><%= handle.substr(1, handle.length - 1) %></span></span></h1>
+				<div class="row">
+					<div class="col">
+						<span class="label">Current Rating : </span><span style="color :<%= curTier %>"><%= curRating %> </span>
+					</div>
+					<div class="col">
+						<span class="label">Max. Rating : </span><span style="color :<%= maxTier %>"><%= maxRating %> </span>
+					</div>
+					<div class="w-100"></div>
+					<div class="col">
+						<span class="label">Contests : </span><span><%= contestCount %> </span>
+					</div>
+					<div class="col">
+						<span class="label">Problems Solved : </span><span><%= solvedProblems %> </span>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- 	Rating Curve		 -->
+			<div class="info-box">
+				 <div class="container" >
+					<canvas id="ratingGraph"></canvas>
+				</div>
+				<script>
+					let ratingGraph = document.getElementById('ratingGraph').getContext('2d');
+					Chart.defaults.global.defaultFontFamily = 'Sans-Serif';
+					Chart.defaults.global.defaultFontSize = 18;
+					Chart.defaults.global.defaultFontColor = '#000';
+					let ratingGraphChart = new Chart(ratingGraph, {
+						type: 'line', 
+						data: {
+							labels: <%- JSON.stringify(contestid); %>,
+							datasets: [{
+								data: <%- JSON.stringify(userRating); %>,
+								backgroundColor: 'rgba(136, 125, 255, 1)',
+								borderWidth: 0,
+								borderColor: '#000',
+								hoverBorderWidth: 3,
+								hoverBorderColor: '#777',
+								lineTension : 0.2,
+								pointHoverRadius: 5,
+								pointHoverBackgroundColor: 'rgba(20, 50, 150, 1)'
+							}]
+						},
+						options: {
+							title:{
+								display: true,
+								text: 'Rating Curve of ' + <%- JSON.stringify(handle); %>,
+								fontSize: 25,
+								padding: 30
+							},
+							legend:{
+								display: false
+							},
+							layout:{
+								padding: {
+									left: 20,
+									right: 10,
+									bottom: 0,
+									top: 0
+						  		}
+							},
+							tooltips:{
+								enabled: true
+							}
+					  	}
+					});
+				</script>
+
+				<div style="height: 20px"></div>
+			</div>
+			
+			
+			<!-- 	Problem Rating Distribution		 -->
+			<div class="info-box">
+				<div class="container" >
+					<canvas id="ratingDistribution"></canvas>
+				</div>
+				<script>
+					let ratingDistribution = document.getElementById('ratingDistribution').getContext('2d');
+					colors = [  'rgba(0, 33, 255, 1)', 'rgba(0, 33, 245, 1)', 'rgba(0, 33, 235, 1)',
+								'rgba(0, 33, 225, 1)', 'rgba(0, 33, 215, 1)', 'rgba(0, 33, 205, 1)',
+								'rgba(0, 33, 195, 1)', 'rgba(0, 33, 185, 1)', 'rgba(0, 33, 175, 1)',
+								'rgba(0, 33, 165, 1)', 'rgba(0, 33, 155, 1)', 'rgba(0, 33, 145, 1)',
+								'rgba(0, 33, 135, 1)', 'rgba(0, 33, 125, 1)', 'rgba(0, 33, 115, 1)',
+								'rgba(0, 33, 105, 1)', 'rgba(0, 33, 95, 1)', 'rgba(0, 33, 85, 1)',
+								'rgba(0, 33, 75, 1)', 'rgba(0, 33, 65, 1)', 'rgba(0, 33, 55, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',
+								'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)', 'rgba(0, 33, 50, 1)',  ];
+					Chart.defaults.global.defaultFontFamily = 'Sans-Serif';
+					Chart.defaults.global.defaultFontSize = 18;
+					Chart.defaults.global.defaultFontColor = '#000';
+					let ratingDistributionChart = new Chart(ratingDistribution, {
+						type: 'bar',
+						data: {
+							labels: <%- JSON.stringify(problemRating); %>,
+							datasets: [{
+								data: <%- JSON.stringify(problemCount); %>,
+								backgroundColor: colors,
+								borderWidth: 1,
+								borderColor: '#000',
+								hoverBorderWidth: 2,
+								hoverBorderColor: '#777'
+							}]
+						},
+						options: {
+							title: {
+								display: true,
+								text: 'Problem Ratings of ' + <%- JSON.stringify(handle); %>,
+								fontSize: 25,
+								padding: 30
+							},
+							legend: {
+								display: false
+							},
+							layout: {
+								padding: {
+									left: 20,
+									right: 10,
+									bottom: 0,
+									top: 0
+								}
+							},
+							tooltips: {
+								enabled: true
+							}
+						}
+					});
+				</script>
+				<div style="height: 20px"></div>
+			</div>
+			
+			
+			<!-- 	Problem Tag Distribution		 -->
+			<div class="info-box">
+				<div class="container" >
+    				<canvas id="tagDistribution" width="400" height="400"></canvas>
+  				</div>
+  				<script>
+    				let tagDistribution = document.getElementById('tagDistribution').getContext('2d');
+    				colors = [  'rgba(144, 169, 172, 1)', 'rgba(195, 149, 189, 1)', 'rgba(151, 150, 161, 1)', 
+								'rgba(151, 176, 160, 1)', 'rgba(142, 194, 195, 1)', 'rgba(186, 174, 194, 1)', 
+								'rgba(174, 186, 190, 1)', 'rgba(141, 144, 187, 1)', 'rgba(177, 152, 158, 1)', 
+								'rgba(146, 146, 190, 1)', 'rgba(182, 148, 173, 1)', 'rgba(182, 165, 153, 1)', 
+								'rgba(154, 189, 198, 1)', 'rgba(141, 153, 178, 1)', 'rgba(147, 165, 193, 1)', 
+								'rgba(172, 191, 170, 1)', 'rgba(160, 177, 199, 1)', 'rgba(157, 188, 165, 1)', 
+								'rgba(168, 147, 168, 1)', 'rgba(197, 173, 158, 1)', 'rgba(191, 151, 151, 1)', 
+								'rgba(175, 158, 154, 1)', 'rgba(190, 154, 149, 1)', 'rgba(172, 157, 140, 1)', 
+								'rgba(148, 168, 199, 1)', 'rgba(164, 173, 142, 1)', 'rgba(172, 181, 166, 1)', 
+								'rgba(165, 178, 197, 1)', 'rgba(161, 154, 170, 1)', 'rgba(156, 146, 154, 1)', 
+								'rgba(167, 142, 145, 1)', 'rgba(166, 179, 173, 1)', 'rgba(150, 171, 189, 1)', 
+								'rgba(150, 149, 170, 1)', 'rgba(200, 143, 142, 1)', 'rgba(197, 170, 143, 1)', 
+								'rgba(170, 142, 172, 1)', 'rgba(155, 140, 200, 1)', 'rgba(187, 170, 165, 1)', 
+								'rgba(157, 185, 194, 1)'  ];
+					Chart.defaults.global.defaultFontFamily = 'Sans-Serif';
+					Chart.defaults.global.defaultFontSize = 18;
+					Chart.defaults.global.defaultFontColor = '#000';
+    				let tagDistributionChart = new Chart(tagDistribution, {
+      				type: 'doughnut', 
+      				data: {
+        				labels: <%- JSON.stringify(tag); %>,
+        				datasets: [{
+          					data: <%- JSON.stringify(tagCount); %>,
+          					backgroundColor: colors,
+						    borderWidth: 1,
+          					hoverBorderWidth: 2,
+          					hoverBorderColor: '#777'
+        				}]
+      				},
+      				options: {
+        				responsive: true,
+        				maintainAspectRatio: false,
+	        			title: {
+				        	display: true,
+          					text: 'Tags of ' + <%- JSON.stringify(handle); %>,
+          					fontSize: 25,
+          					padding: 30
+        				},
+        				legend: {
+          					display: true,
+          					position: 'right',
+          					labels: {
+								usePointStyle: true,
+            					boxWidth: 30,
+            					fontSize: 10,
+            					padding: 6,
+            					fontColor:'#000'
+          					}
+        				},
+        				layout: {
+          					padding: {
+            					left: 20,
+            					right: 10,
+            					bottom: 0,
+            					top: 0
+          					}
+        				},
+        				tooltips: {
+          					enabled: true
+        				}
+      				}
+    			});
+				</script>
+				<div style="height: 20px"></div>
+			</div>
+			
+			
+			<!-- 	Verdict Distribution		 -->
+			<div class="info-box">
+				<div class="container">
+		    		<canvas id="verdictDistribution" width="400" height="400"></canvas>
+  				</div>
+  				<script>
+    				let verdictDistribution = document.getElementById('verdictDistribution').getContext('2d');
+    				colors = ['rgba(0, 255, 0, 1)', 'rgba(255, 0, 0, 1)', 'rgba(0, 0, 255, 1)',
+							  'rgba(155, 38, 56, 1)', 'rgba(166, 164, 34, 1)', 'rgba(105, 18, 81, 1)',
+							  'rgba(55, 103, 100, 1)', 'rgba(100, 120, 11, 1)', 'rgba(25, 200, 120, 1)',
+							  'rgba(173, 127, 50, 1)'
+							]
+    				Chart.defaults.global.defaultFontFamily = 'Sans-Serif';
+    				Chart.defaults.global.defaultFontSize = 18;
+    				Chart.defaults.global.defaultFontColor = '#000';
+    				let verdictDistributionChart = new Chart(verdictDistribution, {
+      					type: 'pie', 
+      					data: {
+        					labels: <%- JSON.stringify(verdict); %>,
+        					datasets: [{
+          						data: <%- JSON.stringify(verdictCount); %>,
+          						backgroundColor: colors,
+          						borderWidth: 1,
+          						borderColor: '#f1f1f1',
+          						hoverBorderWidth: 2,
+          						hoverBorderColor: '#000'
+        					}]
+      					},
+      					options: {
+        					responsive: true,
+        					maintainAspectRatio: false,
+        					title: {
+          						display: true,
+          						text: 'Verdicts of ' + <%- JSON.stringify(handle); %>,
+          						fontSize: 25,
+          						padding: 30
+        					},
+        					legend: {
+          						display: true,
+          						position: 'right',
+          						labels: {
+									usePointStyle: true,
+            						fontColor: '#000'
+          						}
+        					},
+        					layout: {
+          						padding: {
+            						left: 20,
+            						right: 10,
+            						bottom: 0,
+            						top: 0
+          						}
+        					},
+        					tooltips: {
+          						enabled:true
+        					}
+      					}
+    				});
+  				</script>
+ 				<div style="height: 20px"></div>
+			</div>
+		</div>
+	</body>
+</html>
