@@ -1,0 +1,281 @@
+@import url(https://fonts.googleapis.com/css?family=Audiowide&display=swap);
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #f1f1f1;
+}
+
+nav {
+	height: 60px;
+}
+
+.home-btn {
+	color: #FFF;
+	font-weight: 500;
+	font-size: 25px;
+	letter-spacing: 2px;
+}
+
+.nav-btn {
+	color: #FFF;
+	font-weight: 300;
+	font-size: 20px;
+	letter-spacing: 1.5px;
+}
+
+.nav-item {
+	margin: 0 20px;
+}
+
+.search {
+	margin-top: 100px;
+}
+
+.searchbar {
+	margin-bottom: auto;
+	margin-top: auto;
+	height: 60px;
+	background-color: #353b48;
+	border-radius: 30px;
+	padding: 10px;
+	outline: none;
+}
+
+.search_input {
+	color: #FFF;
+	border: 0;
+	background: none;
+	text-align: center;
+	font-size: 20px;
+	margin: 0 20px;
+	width: 450px;
+	letter-spacing: 1.5px;
+	caret-color: #FFF;
+	line-height: 40px;
+	outline: none;
+}
+
+.search_icon {
+	height: 40px;
+	width: 40px;
+	float: right;
+	background: none;
+	border: none;
+	display: flex;
+	outline: none;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.search_icon:focus {
+	outline: none;
+}
+
+.search_icon:hover {
+	background: #FFF;
+	color: #e74c3c;
+}
+
+.container1 {
+	width: 60%;
+}
+
+.jumbotron {
+	margin-top: 40px;
+	background: inherit;
+}
+
+.display-4 {
+	text-align: center;
+	margin-bottom: 30px;
+	font-weight: 600;
+	letter-spacing: 2px;
+}
+
+.lead {
+	text-align: center;
+	font-size: 22px;
+}
+
+.handle {
+	margin-bottom: 10px;
+}
+
+.home-heading {
+	font-weight: 900;
+}
+
+.home-heading span {
+	margin: 0;
+	font-size: 40px;
+}
+
+.stats-nav {
+	margin-bottom: 40px;
+}
+
+.compare-nav {
+	margin-bottom: 100px;
+}
+
+.info-box {
+	margin-bottom: 30px;
+	padding: 5px 0;
+	border: 1.5px solid #000;
+	border-radius: 10px;
+}
+
+.col {
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.label {
+	font-weight: 800;
+}
+
+.table-wrapper {
+	width: 700px;
+	margin: 30px auto;
+	background: #fff;
+	padding: 20px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+	border-radius: 10px;
+}
+
+.table-title {
+	padding-bottom: 10px;
+	margin: 0 0 10px;
+}
+
+.table-title h2 {
+	margin: 6px 0 0;
+	font-size: 22px;
+}
+
+.table-title .add-new {
+	float: right;
+	height: 30px;
+	font-weight: 700;
+	font-size: 12px;
+	text-shadow: none;
+	min-width: 100px;
+	border-radius: 50px;
+	line-height: 13px;
+}
+
+.table-title .add-new i {
+	margin-right: 4px;
+}
+
+table.table {
+	table-layout: fixed;
+}
+
+table.table tr th,
+table.table tr td {
+	border-color: #e9e9e9;
+}
+
+table.table th i {
+	font-size: 13px;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+table.table th:last-child {
+	width: 100px;
+}
+
+table.table td a {
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 5px;
+	min-width: 24px;
+}
+
+table.table td a.add {
+	color: #27C46B;
+}
+
+table.table td a.edit {
+	color: #FFC107;
+}
+
+table.table td a.delete {
+	color: #E34724;
+}
+
+table.table td i {
+	font-size: 19px;
+}
+
+table.table td a.add i {
+	font-size: 24px;
+	margin-right: -1px;
+	position: relative;
+	top: 4px;
+}
+
+table.table .form-control {
+	height: 32px;
+	line-height: 32px;
+	box-shadow: none;
+	border-radius: 2px;
+}
+
+table.table .form-control.error {
+	border-color: #f50000;
+}
+
+table.table td .add {
+	display: none;
+}
+
+.match {
+	border: none;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+	background-color: #fff;
+	opacity: 1;
+}
+
+.form-control:disabled:hover,
+.form-control[readonly]:hover {
+	cursor: initial;
+}
+
+.compare-btn {
+	border-radius: 22px;
+	font-weight: 600;
+	padding: 5px 20px;
+}
+
+#datatable th,
+#datatable td {
+	text-align: center;
+}
+
+#datatable th {
+	font-weight: 900;
+	font-size: 18px;
+	letter-spacing: 1px;
+}
+
+#datatable td {
+	font-weight: 600;
+	font-size: 16px;
+	letter-spacing: .8px;
+}
+
+label {
+	font-size: 16px;
+	letter-spacing: 1px;
+}
