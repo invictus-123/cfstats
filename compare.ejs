@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CF Stat - <%= title %></title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script src="scripts.js"></script>
+	</head>
+	<body><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark compare-nav">
+			<div class = "container">
+				<a class="navbar-brand home-btn" href="/">Codeforces Stats</a>
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><span class="nav-btn">Home</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/compare"><span class="nav-btn">Compare</span></a>
+					</li>
+				</ul>
+				<form class="form-inline" action="/getHandle" method="GET">
+					<input class="form-control mr-sm-2" type="search" name = "handle" placeholder="Enter codeforces handle" aria-label="Search">
+					<button class="btn btn-success" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		<div class="container-lg">
+			<div class="table-responsive">
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-8"><h2>Add <b>Handle</b></h2></div>
+							<div class="col-sm-4">
+								<button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+							</div>
+						</div>
+					</div>
+					<form action="/getHandles" method="GET">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Handle</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>   
+							</tbody>
+						</table>
+						<button type="submit" class="btn btn-info compare-btn">Compare</button>
+					</form>
+				</div>
+			</div>
+		</div>     
+	</body>
+</html>
