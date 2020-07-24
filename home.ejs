@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CF Stat - <%= title %></title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	</head>
+	<body><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class = "container">
+				<a class="navbar-brand home-btn" href="/">Codeforces Stats</a>
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><span class="nav-btn">Home</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/compare"><span class="nav-btn">Compare</span></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container h-100 search">
+			<div class="d-flex justify-content-center h-100">
+				<form action="/getHandle" method="GET" class="searchbar" autocomplete="off">
+					<input class="search_input" type="text" name="handle" placeholder="Enter codeforces handle">
+					<button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+		</div>
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container container1">
+				<h1 class="display-4">CF Stats</h1>
+				<p class="lead">CF Stats, short for Codeforces Stats is a web application developed by <br> Ayushman Mathur for the purpose of visualisation of data.</p>
+				<p class="lead">This app allows you to keep track of your performance as you hone their programming skills on the popular coding platform Codeforces. It also enables the you to compare your progress with others so that you are always aware of your competition!</p>
+			</div>
+		</div>
+	</body>
+</html>
