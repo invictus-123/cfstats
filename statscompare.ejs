@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+		<link rel="stylesheet" href="styles.css">
+		<title>CF Stat - <%= title %></title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark stats-nav">
+			<div class = "container">
+				<a class="navbar-brand home-btn" href="/">Codeforces Stats</a>
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><span class="nav-btn">Home</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/compare"><span class="nav-btn">Compare</span></a>
+					</li>
+				</ul>
+				<form class="form-inline" action="/getHandle" method="GET">
+					<input class="form-control mr-sm-2" type="search" name = "handle" placeholder="Enter codeforces handle" aria-label="Search">
+					<button class="btn btn-success" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Handle</th>
+						<th>Cur Rating</th>
+						<th>Max. Rating</th>
+						<th>Solved</th>
+						<th>Submissions</th>
+						<th>Contests</th>
+						<th>Best Rank</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Handle</th>
+						<th>Cur Rating</th>
+						<th>Max. Rating</th>
+						<th>Solved</th>
+						<th>Submissions</th>
+						<th>Contests</th>
+						<th>Best Rank</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					<% userData.forEach(function(user) { %>
+						<tr>
+							<td><span style="color :
+									<% if(user.curRating >= 3000) {%>
+										black
+									<% } else { %>
+										<%= user.curTier %>
+									<% } %>;"><%= user.handle.substr(0, 1) %></span><span style="color: <%= user.curTier %>;"><%= user.handle.substr(1, user.handle.length - 1) %></span></td>
+							<td><span style="color :<%= user.curTier %>"><%= user.curRating %> </span></td>
+							<td><span style="color :<%= user.maxTier %>"><%= user.maxRating %> </span></td>
+							<td><%= user.problems %></td>
+							<td><%= user.attempts %></td>
+							<td><%= user.contests %></td>
+							<td><%= user.bestRank %></td>
+						</tr>
+					<% }); %>
+				</tbody>
+			</table>
+		</div>
+		<script>
+			$(document).ready(function() {
+				  $('#dataTable').DataTable();
+			});
+		</script>
+	</body>
+</html>
