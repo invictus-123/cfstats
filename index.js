@@ -190,7 +190,7 @@ function getVerdictDistribution() {
 	});
 }
 
-
+ 
 // This snippet displays all the data
 app.get("/displayStats", function(req, res) {
 	res.render("stats", {title : String(handle) + " stats",
