@@ -377,6 +377,6 @@ function getTier(cur) {
 }
 
 
-app.listen(3000, function(req, res) {
+app.listen(process.env.PORT || 3000, function(req, res) {
 	console.log("We are live...");
 });
